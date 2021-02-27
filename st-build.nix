@@ -5,7 +5,7 @@ stdenv.mkDerivation rec {
     version = "0.99";
     src = /home/agl/github/st;
     nativeBuildInputs = [ pkgconfig ];
-    buildInputs = [ xorg.libX11 ncurses xorg.libXext xorg.libXft fontconfig ];
+    buildInputs = [ xorg.libX11 ncurses xorg.libXext xorg.libXft fontconfig harfbuzz ];
     installPhase = ''
         TERMINFO=$out/share/terminfo make install PREFIX=$out
         '';
