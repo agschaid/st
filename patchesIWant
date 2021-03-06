@@ -1,8 +1,8 @@
-clipboard
-scrollback
-externalpipe-eternal
-ligatures
-solarized-both
+X scrollback
+X externalpipe-eternal
+X ligatures
+X solarized-both
 
 vielleicht:
 newterm 
+clipboard
