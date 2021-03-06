@@ -9,7 +9,39 @@ this my fork of:
 
 For the original requirements and installation please see the 
 [original page](https://st.suckless.org/). I am only building this for and with 
-[NixOS](https://nixos.org/) so that's the only build I support.
+[NixOS](https://nixos.org/) so that's the only build I support and all requirements 
+should be covered by the `default.nix` file.
+
+### Build localy
+Just run `nix-build` or `nix-build default.nix`. The binary can be found at `result/bin/st`.
+
+### Include in NixOS
+
+In my `configuration.nix` have (among overlay definitions) this:
+
+```
+  nixpkgs.overlays = 
+    let
+      st_src = pkgs.fetchFromGitHub {
+            owner  = "agschaid";
+            repo   = "st";
+            rev    = "f12614d87a37b3a3a6589b6194b1d41ebdc205d3";
+            sha256 = "0lssaxm9caviz9q2cpf8hghq0fxnlhw2mywqxggag1vfqiandyhs";
+        };
+
+      src_overlays = self: super: {
+        st = import "${st_src}/default.nix";
+      };
+
+      other_overlays = self: super: {
+        # other stuff
+      };
+
+    in
+    [other_overlays src_overlays];
+```
+Not sure if this is the most elegant or idiomatic way but when works: when installing `st`
+the version of this repo is chosen over the standard version.
 
 ## Changes
 
