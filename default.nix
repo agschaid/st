@@ -3,7 +3,7 @@ with import <nixpkgs> {};
 stdenv.mkDerivation rec {
     name = "st";
     version = "0.99";
-    src = /home/agl/github/st;
+    src = ./.;
     nativeBuildInputs = [ pkgconfig ];
     buildInputs = [ xorg.libX11 ncurses xorg.libXext xorg.libXft fontconfig harfbuzz ];
     installPhase = ''
