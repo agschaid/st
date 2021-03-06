@@ -189,8 +189,14 @@ static MouseShortcut mshortcuts[] = {
 
 
 static char *openurlcmd[] = { "/bin/sh", "-c",
-	"xurls | dmenu -l 10 -w $WINDOWID | xargs -r open",
+    /* taken from https://st.suckless.org/patches/externalpipe/  -> link_grabber*/
+	"regex='(((http|https|ftp|gopher)|mailto)[.:][^ >\"\\t]*|www\\.[-a-z0-9.]+)[^ .,;\\t>\">\\):]'; url=$(grep -Po \"$regex\" | dmenu -p \"Go:\" -w \"$WINDOWID\") || exit; $BROWSER \"$url\"",
 	"externalpipe", NULL };
+
+static char *edit_screen[] = { "/bin/sh", "-c",
+    /* taken from https://st.suckless.org/patches/externalpipe/  -> edit_screen*/
+    "tmpfile=$(mktemp /tmp/st-edit.XXXXXX); trap  'rm \"$tmpfile\"' 0 1 15; cat > \"$tmpfile\"; st -e \"$EDITOR\" \"$tmpfile\"",
+    "externalpipe", NULL};
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -210,6 +216,7 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
     { TERMMOD,              XK_U,           externalpipe,   {.v = openurlcmd } },
+    { TERMMOD,              XK_E,           externalpipe,   {.v = edit_screen } },
 };
 
 /*
