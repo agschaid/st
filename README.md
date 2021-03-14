@@ -7,7 +7,7 @@ this my fork of:
 
 ## Changes
 
-This fork is based on version 0.8.3 of st with the following changes:
+This fork is based on version 0.8.4 of st with the following changes:
 
 * [ligatures](https://st.suckless.org/patches/ligatures/) patch applied (because I looooove [Victor Mono](https://rubjo.github.io/victor-mono/) )
 * changed font to Victor Mono too
@@ -33,7 +33,7 @@ Just run `nix-build` or `nix-build default.nix`. The binary can be found at `res
 
 ### Include in NixOS
 
-In my `configuration.nix` have (among overlay definitions) this:
+In my `configuration.nix` I have (among other overlay definitions) this:
 
 ```
   nixpkgs.overlays = 
@@ -56,7 +56,7 @@ In my `configuration.nix` have (among overlay definitions) this:
     in
     [other_overlays src_overlays];
 ```
-Not sure if this is the most elegant or idiomatic way but when works: when installing `st`
+Not sure if this is the most elegant or idiomatic way but it works: when installing `st`
 the version of this repo is chosen over the standard version.
 
 
